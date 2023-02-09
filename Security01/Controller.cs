@@ -12,8 +12,6 @@ namespace Security01
         public string originalText;
 
         public string key;
-        public int k;
-        public string type;
 
         public ASCIIEncoding ascii;
         public byte[] textBytes;
@@ -30,73 +28,68 @@ namespace Security01
         public void Start()
         {
             Console.Clear();
-            Console.WriteLine("Text to be encrypted");
-            Console.WriteLine(text + "\n");
-            Console.WriteLine("Please imput a number or a word that will be used to encrypt your text");
+            Console.WriteLine("Text to be encrypted: " + text + "\n");
+            Console.WriteLine("Please imput a key that will be used to encrypt your text, only use ASCII characters index [32-127]\nencryption key must be shorted or same lengh as the text, empty encryption key is not allowed too:");
             string t = Console.ReadLine();
 
-            TextOrNumber(t);
-            Encrypt();
-            Decrypt();
-        }
-
-        public void TextOrNumber(string t)
-        {
-            try
+            if (t.Length <= text.Length && t.Length != 0)
             {
-                type = "number";
-                k = int.Parse(t);
+                key = t;
             }
-            catch (Exception)
+            else
             {
-                if (t.Length <= text.Length)
-                {
-                    type = "word";
-                    key = t;
-                }
-                else
-                {
-                    Start();
-                }
+                Start();
+            }
+
+            Console.Clear();
+            Console.WriteLine("Text to be encrypted: " + text);
+            Console.WriteLine("Encryption Key: " + key + "\n");
+
+            Encrypt();
+
+            Console.WriteLine("Encrypted text: " + text);
+            Console.ReadLine();
+
+            Console.Clear();
+            Console.WriteLine("Original Text: " + originalText);
+            Console.WriteLine("Encryption Key: " + key);
+            Console.WriteLine("Encrypted text: " + text + "\n");
+
+            Decrypt();
+
+            Console.WriteLine("Decrypted text: " + text + "\n");
+            Console.WriteLine("To start again press Enter, to close the console type 'close'");
+            string x = Console.ReadLine();
+
+            if (x != "close")
+            {
+                Start();
             }
         }
 
         public void Encrypt()
         {
             textBytes = ascii.GetBytes(text);
+            keyBytes = ascii.GetBytes(key);
 
-            if (type == "number")
+            Byte[] encryptedBytes = new byte[textBytes.Length];
+            int i = 0;
+            int y = 0;
+            foreach (var b in textBytes)
             {
-                Byte[] encryptedBytes = new byte[textBytes.Length];
-                int i = 0;
-                foreach (var b in textBytes)
+                if (y == keyBytes.Length)
                 {
-                    int x = b + k % 128;
-                    encryptedBytes[i] = (byte)x;
-                    text = ascii.GetString(encryptedBytes);
-                    Console.WriteLine(x);
-                    i++;
+                    y = 0;
                 }
-                Console.WriteLine(text);
-                Console.ReadLine();
-            }
-            else
-            {
-                keyBytes = ascii.GetBytes(key);
-
-                Byte[] encryptedBytes = new byte[textBytes.Length];
-                int i = 0;
-                int y;
-                foreach (var b in textBytes)
-                {
-                    int x = b + k % 128;
-                    encryptedBytes[i] = (byte)x;
-                    text = ascii.GetString(encryptedBytes);
-                    Console.WriteLine(x);
-                    i++;
-                }
-                Console.WriteLine(text);
-                Console.ReadLine();
+                int k = keyBytes[y];
+                int x = b - 64;
+                x = x + k;
+                x = x % 95;
+                x = x + 32;
+                encryptedBytes[i] = (byte)x;
+                text = ascii.GetString(encryptedBytes);
+                i++;
+                y++;
             }
         }
 
@@ -104,25 +97,24 @@ namespace Security01
         {
             textBytes = ascii.GetBytes(text);
 
-            if (type == "number")
+            Byte[] decryptedBytes = new byte[textBytes.Length];
+            int i = 0;
+            int y = 0;
+            foreach (var b in textBytes)
             {
-                Byte[] decryptedBytes = new byte[textBytes.Length];
-                int i = 0;
-                foreach (var b in textBytes)
+                if (y == keyBytes.Length)
                 {
-                    int x = b - k + 128 % 128;
-                    decryptedBytes[i] = (byte)x;
-                    text = ascii.GetString(decryptedBytes);
-                    Console.WriteLine(x);
-                    i++;
+                    y = 0;
                 }
-                Console.WriteLine(originalText);
-                Console.WriteLine(text);
-                Console.ReadLine();
-            }
-            else
-            {
-
+                int k = keyBytes[y];
+                int x = b - k;
+                x = x + 95;
+                x = x % 95;
+                x = x + 32;
+                decryptedBytes[i] = (byte)x;
+                text = ascii.GetString(decryptedBytes);
+                i++;
+                y++;
             }
         }
     }

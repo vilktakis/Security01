@@ -11,7 +11,8 @@ namespace Security01
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Input the text you wish to encrypt:");
+            Console.OutputEncoding = System.Text.Encoding.ASCII;
+            Console.WriteLine("Input the text you wish to encrypt, only use ASCII characters index [32-127]:");
             string text = Console.ReadLine();
 
             Controller controller = new Controller(text);
