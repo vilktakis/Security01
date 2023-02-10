@@ -14,3 +14,11 @@ C:\Users\Skirmantas Auškalnis\Source\Repos\Security01\Security01\obj\Debug\Secu
 C:\Users\Skirmantas Auškalnis\Source\Repos\Security01\Security01\obj\Debug\Security01.csproj.CoreCompileInputs.cache
 C:\Users\Skirmantas Auškalnis\Source\Repos\Security01\Security01\obj\Debug\Security01.exe
 C:\Users\Skirmantas Auškalnis\Source\Repos\Security01\Security01\obj\Debug\Security01.pdb
+C:\Users\s042189\Source\Repos\Security02\Security01\bin\Debug\Security01.exe.config
+C:\Users\s042189\Source\Repos\Security02\Security01\bin\Debug\Security01.exe
+C:\Users\s042189\Source\Repos\Security02\Security01\bin\Debug\Security01.pdb
+C:\Users\s042189\Source\Repos\Security02\Security01\obj\Debug\Security01.csproj.AssemblyReference.cache
+C:\Users\s042189\Source\Repos\Security02\Security01\obj\Debug\Security01.csproj.SuggestedBindingRedirects.cache
+C:\Users\s042189\Source\Repos\Security02\Security01\obj\Debug\Security01.csproj.CoreCompileInputs.cache
+C:\Users\s042189\Source\Repos\Security02\Security01\obj\Debug\Security01.exe
+C:\Users\s042189\Source\Repos\Security02\Security01\obj\Debug\Security01.pdb

@@ -82,10 +82,15 @@ namespace Security01
                     y = 0;
                 }
                 int k = keyBytes[y];
-                int x = b - 64;
+                int x = b;
                 x = x + k;
-                x = x % 95;
+                x = x % 127;
                 x = x + 32;
+                if (x >= 127)
+                {
+                    x = x % 127;
+                    x = x + 32;
+                }
                 encryptedBytes[i] = (byte)x;
                 text = ascii.GetString(encryptedBytes);
                 i++;
@@ -109,8 +114,8 @@ namespace Security01
                 int k = keyBytes[y];
                 int x = b - k;
                 x = x + 95;
-                x = x % 95;
-                x = x + 32;
+                x = x % 127;
+
                 decryptedBytes[i] = (byte)x;
                 text = ascii.GetString(decryptedBytes);
                 i++;
