@@ -17,16 +17,19 @@ namespace Security01
         public byte[] textBytes;
         public byte[] keyBytes;
 
-        public Controller(string t)
+        public Controller()
         {
-            text = t;
-            originalText = t;
-
             ascii = new ASCIIEncoding();
         }
 
         public void Start()
         {
+            Console.WriteLine("Input the text you wish to encrypt, only use ASCII characters index [32-127]:");
+            string j = Console.ReadLine();
+
+            text = j;
+            originalText = j;
+
             Console.Clear();
             Console.WriteLine("Text to be encrypted: " + text + "\n");
             Console.WriteLine("Please imput a key that will be used to encrypt your text, only use ASCII characters index [32-127]\nencryption key must be shorted or same lengh as the text, empty encryption key is not allowed too:");
@@ -83,15 +86,10 @@ namespace Security01
                     y = 0;
                 }
                 int k = keyBytes[y];
-                int x = b;
+                int x = b - 64;
                 x = x + k;
-                x = x % 127;
+                x = x % 95;
                 x = x + 32;
-                if (x >= 127)
-                {
-                    x = x % 127;
-                    x = x + 32;
-                }
                 encryptedBytes[i] = (byte)x;
                 text = ascii.GetString(encryptedBytes);
                 i++;
@@ -115,8 +113,8 @@ namespace Security01
                 int k = keyBytes[y];
                 int x = b - k;
                 x = x + 95;
-                x = x % 127;
-
+                x = x % 95;
+                x = x + 32;
                 decryptedBytes[i] = (byte)x;
                 text = ascii.GetString(decryptedBytes);
                 i++;
