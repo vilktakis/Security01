@@ -65,6 +65,7 @@ namespace Security01
             {
                 Start();
             }
+
         }
 
         public void Encrypt()
